@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table,tr,th,td{
+            border: 5px solid ;
+        }
+        tr,td,th{
+            padding: 5px;
+        }
+    </style>
+</head>
+<body style="background-color: lightgreen;">
+    <div >
+        <button id="btn">
+            click here to see the data in table
+        </button>
+    </div>
+    <table>
+        
+    </table>
+    <script>
+        let btn = document.getElementById("btn");
+        let table = document.getElementsByTagName("table");
+        console.log(table[0]);
+        btn.addEventListener("click",async()=>{
+            let response = await fetch("http://localhost:3002");
+            let api_data = await response.json();
+            console.log(api_data);
+            let tr = document.createElement("tr");
+            let th_username = document.createElement("th");
+            let th_password = document.createElement("th");
+            let th_email = document.createElement("th");
+            let th_phono = document.createElement("th");
+            let tr1 = document.createElement("tr");
+            let td_username = document.createElement("td");
+            let td_password = document.createElement("td");
+            let td_email = document.createElement("td");
+            let td_phono = document.createElement("td");
+            th_username.innerHTML = "username";
+            th_password.innerHTML = "password";
+            th_email.innerHTML = "eamil";
+            th_phono.innerHTML = "phono";
+            td_username.innerHTML = api_data.username;
+            td_password.innerHTML = api_data.password;
+            td_email.innerHTML = api_data.email;
+            td_phono.innerHTML = api_data.phono;
+            tr.append(th_username,th_password,th_email,th_phono);
+            tr1.append(td_username,td_password,td_email,td_phono);
+            table[0].append(tr,tr1);
+            document.body.append(table[0]);
+
+
+        })
+    </script>
+</body>
+</html>
